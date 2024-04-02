@@ -1,3 +1,4 @@
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,11 +13,11 @@ public class VideoController : MonoBehaviour
 
     public void OnValueChanged(string value)
     {
-        VideoClip clip = Resources.Load<VideoClip>(value);
-        if (clip != null)
+        string path = Path.Combine("C:/Videolar", value + ".mp4");
+        if (File.Exists(path))
         {
             errorText.text = "";
-            videoPlayer.clip = clip;
+            videoPlayer.url = path;
             videoPlayer.Play();
         }
         else
